@@ -1,0 +1,44 @@
+var.screenWidth = 1920
+var.screenHeight = 1080
+
+mouse.CursorPosX = smooth(1920-round((Wiimote.Dot1X / 1024) * var.screenWidth), 3)
+mouse.CursorPosY = smooth(round((Wiimote.Dot1Y / 768) * var.screenHeight), 3)
+mouse.LeftButton = Wiimote.B and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.RightButton = Wiimote.A and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.MiddleButton = Wiimote.Home and KeepDown(Wiimote.PointerVisible,0.5s)
+Key.Five = Wiimote.Plus
+Key.One = Wiimote.Minus
+mouse.RightButton + mouse.LeftButton = Wiimote.One
+
+
+
+   var.SpeedX = var.TopUp * var.YawSpeed - ( var.TopUp * var.YawSpeed * var.XYswap ) + ( var.RightDown * var.PitchSpeed * var.XYswap )
+   var.SpeedY = var.TopUp * var.PitchSpeed - ( var.TopUp * var.PitchSpeed * var.XYswap) + ( -var.RightDown * var.YawSpeed * var.XYswap )
+   mouse.DirectInputX = int(var.MouseX)
+   mouse.DirectInputY = int(var.MouseY)
+   var.MouseX = var.MouseX + ( var.SpeedX / (10500000 - EnsureMapRange(var.Speed, 0, 100, 0, 10000000) ) )
+   var.MouseY = var.MouseY - ( var.SpeedY / (10500000 - EnsureMapRange(var.Speed, 0, 100, 0, 10000000) ) )
+/* // for mouse.x and mouse.y instead
+   mouse.x = var.MouseX
+   mouse.y = var.MouseY
+   var.MouseX = var.MouseX + ( var.SpeedX / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+   var.MouseY = var.MouseY - ( var.SpeedY / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+
+
+
+if var.button {
+EIPX+=Delta(var.x)EIP
+Mouse.DirectInputY+=Delta(var.y)
+}
+
+
+if not var.Button {
+	Mouse.DirectInputX+=Smooth(-Delta(Wiimote.dot1x),3)
+        Mouse.DirectInputY+=Smooth(Delta(Wiimote.dot1y),3)
+}
+
+
+
+
+Mouse.DirectInputX = Smooth(-Delta(Wiimote.Dot1X), 3) + Wiimote.PointerX
+Mouse.DirectInputY = Smooth(Delta(Wiimote.Dot1Y), 3) + Wiimote.PointerY

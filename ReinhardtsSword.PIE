@@ -1,0 +1,67 @@
+﻿ // Starwars academy and REINHARDT swing animation
+
+var.MoveButton = wiimote.B
+mouse.LeftButton = wiimote.Minus
+mouse.RightButton = wiimote.Plus
+Keyboard.1 = Wiimote1.Down
+Keyboard.2 = Wiimote1.Left
+Keyboard.3 = Wiimote1.Up
+Keyboard.4 = Wiimote1.Right
+WASD = Nunchuk1.Joy 
+var.scaleX = 800 / 1024
+var.scaleY= 600/768
+var.sense = 2.5
+
+Keyboard.LeftAlt = Nunchuk.C
+Keyboard.Space = Nunchuk.Z
+Keyboard.F = Pressed(Nunchuk1.Shakiness > 10 cm)
+
+
+
+
+if(var.MoveButton=true){
+if Wiimote.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+}
+}
+
+var.swingThreshold = 150
+
+
+var.YawSpeed = wiimote.MotionPlus.YawSpeed
+ var.PitchSpeed = wiimote.MotionPlus.PitchSpeed
+ var.Roll = wiimote.MotionPlus.RollSpeed
+debug = var.PitchSpeed
+ mouse.button1=false
+
+ if (Wiimote.A = true) {
+if var.Pitchspeed> var.swingThreshold
+       mouse.button1 =true
+      else
+         mouse.button1= false
+      endif
+
+}else
+mouse.button1 = false
+endif
+
+var.specialThreshold = 300
+
+
+ // need improvement on the roll action
+debug = ""
+ mouse.button1=false
+
+ if (Wiimote.A = true) {
+if var.Roll> var.specialThreshold
+       Keyboard.RightAlt =true
+       debug = "ROLL"
+      else
+        Keyboard.RightAlt= false
+      endif
+
+}else
+Keyboard.RightAlt = false
+endif

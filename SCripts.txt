@@ -1,0 +1,83 @@
+
+//      OVERWATCH 2 (Wiimote Plus + Nunchuk)
+
+// Wiimote Controls
+Space = Wiimote1.A // Jump
+mouse.button1 = Wiimote1.B // Primary Fire
+T&Keyboard.Zero = Wiimote1.Up // Spray & Voice line
+Q = Wiimote1.Down // Ablity 3 (Ultimate)
+LCtrl = Wiimote1.Left // Crouch
+Keyboard.Nine = Wiimote1.Right // Ping - In World
+V = Wiimote1.Plus // Quick Melee
+E = Wiimote1.Minus // Ablity 2
+Mouse.WheelUp = Wiimote1.One // Next Weapon
+G = Wiimote1.Two // Spray Menu
+C = Wiimote1.Home // Communication Menu
+
+// Nunchuk Controls
+WASD = Nunchuk1.Joy // Move
+LShift = nunchuk1.C // Ability 1
+mouse.button2 = nunchuk1.Z // Secondary Fire
+R = Pressed(Nunchuk1.Shakiness > 10 cm) // Reload
+
+/*
+    Leave the Wiimote on your desk when starting so it can calibrate.
+    Wait until the first LED lights up, then Wiimote is READY to use.
+*/
+
+var.MoveButton = wiimote.Led1
+
+// Cursor Speed & Hold (Wiimote HOME button)
+if Wiimote1.Home then
+  var.Speed = 0
+  else var.Speed = 100   // 0 to 100
+end if
+
+PIE.FrameRate = 120hz
+if wiimote.HasMotionPlus = false then debug = "WiiMotion Plus NOT DETECTED!"
+if wiimote.HasMotionPlus = true then debug = "Wait LED 1 lights up, then Wiimote is READY."
+if wiimote.HasMotionPlus = true and var.MoveButton = true {
+   var.YawSpeed = wiimote.MotionPlus.YawSpeed
+   var.PitchSpeed = wiimote.MotionPlus.PitchSpeed
+   if SameValue( Smooth(wiimote.SmoothRoll, 10), wiimote.SmoothRoll, 10) then var.Roll = Smooth(wiimote.SmoothRoll, 10) else var.Roll = wiimote.SmoothRoll
+   if var.Roll < 0 and var.Roll >= -90 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, -90, 0, 0, 1)
+      var.RightDown = -1
+      var.TopUp = 1
+   }
+   if var.Roll <= 90 and var.Roll >= 0 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, 90, 0, 0, 1)
+      var.RightDown = 1
+      var.TopUp = 1
+   }
+   if var.Roll > 90 and var.Roll <= 180 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, 90, 180, 0, 1)
+      var.RightDown = 1
+      var.TopUp = -1
+   }
+   if var.Roll < -90 and var.Roll >= -180 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, -90, -180, 0, 1)
+      var.RightDown = -1
+      var.TopUp = -1
+   }
+   var.SpeedX = var.TopUp * var.YawSpeed - ( var.TopUp * var.YawSpeed * var.XYswap ) + ( var.RightDown * var.PitchSpeed * var.XYswap )
+   var.SpeedY = var.TopUp * var.PitchSpeed - ( var.TopUp * var.PitchSpeed * var.XYswap) + ( -var.RightDown * var.YawSpeed * var.XYswap )
+   mouse.DirectInputX = int(var.MouseX)
+   mouse.DirectInputY = int(var.MouseY)
+   var.MouseX = var.MouseX + ( var.SpeedX / (10500000 - EnsureMapRange(var.Speed, 0, 100, 0, 10000000) ) )
+   var.MouseY = var.MouseY - ( var.SpeedY / (10500000 - EnsureMapRange(var.Speed, 0, 100, 0, 10000000) ) )
+/* // for mouse.x and mouse.y instead
+   mouse.x = var.MouseX
+   mouse.y = var.MouseY
+   var.MouseX = var.MouseX + ( var.SpeedX / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+   var.MouseY = var.MouseY - ( var.SpeedY / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+*/
+}
+if var.MoveButton = false {
+   var.MouseX = mouse.DirectInputX
+   var.MouseY = mouse.DirectInputY
+/* // for mouse.x and mouse.y instead
+   var.MouseX = mouse.x
+   var.MouseY = mouse.y
+*/
+}

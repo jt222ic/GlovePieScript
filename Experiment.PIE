@@ -1,0 +1,76 @@
+﻿debug =""
+
+
+// testing vibration
+if Wiimote1.One
+Wiimote1.Rumble = true
+Endif
+
+if Wiimote1.Two
+Wiimote1.Rumble = false
+Endif
+
+
+// Testing light sources
+
+if Wiimote1.Left
+   Wiimote.Led2 =1
+    Wiimote.Led3 =0
+Endif
+
+if Wiimote1.Right
+       Wiimote.Led2 =0
+       Wiimote.Led3= 1
+Endif
+
+if Wiimote1.Down
+       Wiimote.Led2 =0
+       Wiimote.Led3= 0
+Endif
+
+
+// testing Debug.log text
+
+
+
+// counting test
+var.count = 1;
+var.add =1
+if Wiimote1.A
+var.count= var.count+var.add
+  debug =var.count
+endif
+
+// Holding button to enable  then do some swing action without affecting the accuracy
+ var.Toggle = false;
+var.Toggle = Wiimote1.B
+if var.Toggle
+   debug ="true"
+   if Wiimote1.Up
+      debug = "TEST"
+Endif
+endif
+
+var.swingThreshold = 100
+
+
+var.YawSpeed = wiimote.MotionPlus.YawSpeed
+ var.PitchSpeed = wiimote.MotionPlus.PitchSpeed
+debug = var.PitchSpeed
+ mouse.button1=false
+
+ if (Wiimote.A = true) {
+if var.Pitchspeed> var.swingThreshold
+       mouse.button1 =true
+      else
+         mouse.button1= false
+      endif
+
+}else
+mouse.button1 = false
+endif
+
+
+
+
+

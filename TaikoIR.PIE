@@ -1,0 +1,24 @@
+﻿
+
+
+if(Wiimote1.DrumBeat&&Wiimote.dot2vis=true){
+Keyboard.J = true
+
+else
+Keyboard.J= false
+
+}
+      // BLUE DON
+if(Wiimote1.DrumBeat&&Wiimote.dot2vis=false){
+Keyboard.K = true
+else
+Keyboard.K= false
+
+}
+}
+
+
+// debug=var.currentDot1Vis
+        //debug=Wiimote1.TimeStamp
+        debug=var.dot1VisDuration
+

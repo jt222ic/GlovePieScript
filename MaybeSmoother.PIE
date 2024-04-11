@@ -1,0 +1,93 @@
+﻿/// IR Lightsource onto screen, recommend to have high sensitivity so you
+//move less with the wii mote for full 360 angle
+// GLOVE PIE version 0.43 + original wii + extention motionplus
+// GlovePie version 0.46 + Wiimotion Plus inside
+
+
+// solution have var sense on x around 1.3, and on var.sense for Y around 30, smooth rate of 10 in x and y maybe 3, need to configure
+
+var.scaleX = 1920 / 1024
+var.scaleY= 1080/ 768
+var.senseX = 4.5
+var.senseY = 4.5
+// Define smoothing parameters
+ // Adjust as needed (0.1 to 1)
+var.smoothingIterations = 5; // Number of iterations for smoothing
+
+// Smooth out the mouse movement along the X-axis
+var.smoothedDeltaX = 0;
+for (var.i = 0; var.i < var.smoothingIterations; var.i++) {
+  var.smoothedDeltaX += Smooth(-Delta(Wiimote.Dot1X * var.scaleX) * var.senseX, 3)
+}
+
+
+// Smooth out the mouse movement along the Y-axis
+var.smoothedDeltaY = 0;
+for (var.j = 0; var.j < var.smoothingIterations; var.j++) {
+    var.smoothedDeltaY += Smooth(Delta(Wiimote.Dot1Y * var.scaleY) * var.senseY, 3)
+}
+
+var.TurnOm= Wiimote1.One
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff=true){
+if Wiimote1.Dot1Size > 0{
+Mouse.DirectInputX += var.smoothedDeltaX / var.smoothingIterations;
+
+Mouse.DirectInputY += var.smoothedDeltaY / var.smoothingIterations;
+}
+}
+
+
+
+WASD = Nunchuk1.Joy // Move
+Space = Wiimote1.A // Jump
+mouse.button1 = Wiimote1.B // Primary Fire
+mouse.button2 = Nunchuk1.Z  // Secondary Fire Off Hand duel Wield
+
+Keyboard.E = Wiimote1.Left     // Special ability 1
+Keyboard.LeftCtrl = Wiimote1.Down
+Keyboard.Escape = Wiimote1.Minus    // Change Weapon
+   // Change Grenade option
+Keyboard.C = Wiimote1.Two      // Command Talk
+Keyboard.F = Nunchuk1.C         // Grenade Throw
+Keyboard.Q = Wiimote1.Left        // ULTIMATE
+         //
+Keyboard.R = Wiimote1.Right       // Reload
+Keyboard.LeftShift = Nunchuk1.C      // Shift or sprint
+Keyboard.H = Wiimote1.Home
+
+//V = Pressed(Nunchuk1.Shakiness > 8 cm)    //Keyboard.Q = Nunchuk1.SwingHorizontal // Melee
+
+V=Wiimote.Stabbing
+
+
+
+
+   // Reload by pointing wii mote up or down not swinging
+
+if (abs(Wiimote.Pitch - 90) < 30)  {
+       Keyboard.R = true
+
+} elseif (abs(Wiimote.Pitch + 90) < 30){
+ Keyboard.R = true
+
+
+else
+ Keyboard.R = false
+
+endif
+
+// testing Jump and crounch down
+
+
+
+

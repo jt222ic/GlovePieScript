@@ -1,0 +1,61 @@
+﻿/// IR Lightsource onto screen, recommend to have high sensitivity so you
+//move less with the wii mote for full 360 angle
+// GLOVE PIE version 0.43 + original wii + extention motionplus
+
+
+
+
+var.scaleX = 1920 / 1024
+var.scaleY=1080/768
+var.sense = 17
+
+var.TurnOm= Wiimote1.One
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff = true){
+if Wiimote.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+}
+}
+
+
+
+WASD = Nunchuk1.Joy // Move
+Space = Wiimote1.A // Jump
+mouse.button1 = Wiimote1.B // Primary Fire
+mouse.button2 = Nunchuk1.Z  // Secondary Fire Off Hand duel Wield
+
+Keyboard.E = Wiimote1.Down     // PickUpWeapon or Interract
+Keyboard.1 = Wiimote1.Minus    // Change Weapon
+Keyboard.2 = Wiimote1.Plus     // Change Grenade option
+Keyboard.C = Wiimote1.UP      // DUEL WIELD
+Keyboard.F = Nunchuk1.C         // Grenade Throw
+Keyboard.L = Wiimote1.Left        // TAb Score
+Keyboard.R = Wiimote1.Right       // Reload
+
+
+Q = Pressed(Nunchuk1.Shakiness > 10 cm)    //Keyboard.Q = Nunchuk1.SwingHorizontal // Melee
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+﻿*/  // Smoothing
+// issues Drifting
+// Works with wiimote with external motion plus for Yaw
+
+// Drift issues
+
+var.N=10
+var.yawSum=0
+var.sampleCount=0
+
+var.yaw=Wiimote1.Yaw
+var.yawSum=var.yawSum+var.yaw
+
+var.sampleCount=var.samepleCount+1
+
+if(var.sampleCount>=N){
+
+var.avgYaw=var.yawSum/var.N
+var.yawSum=0
+var.sampleCount=0
+
+}else{
+//debug="Yaw:"+var.yaw
+}end if
+
+
+var.YawInput = mapRange(var.avgYaw,-180,180,0,100)
+
+var.Condition =var.YawInput
+
+
+
+
+ if var.YawInput >= 49 then
+        // Check for DrumBeat motion
+        if Wiimote1.DrumBeat then
+            Key.F=1
+            else
+            Key.F=0
+        end if
+    else
+        // Check for DrumBeat motion
+        if Wiimote1.DrumBeat then
+           Key.D=1
+           else
+           Key.D=0
+        end if
+    end if
+
+
+
+
+        // Check for DrumBeat motion
+        if Wiimote2.DrumBeat&&Wiimote2.B=false then
+            Key.J=1
+            else
+            Key.J=0
+        end if
+
+           if Wiimote2.DrumBeat&&Wiimote2.B=true then
+            Key.K=1
+            else
+            Key.K=0
+        end if
+
+
+
+
+if(Wiimote.One=true){
+  Wiimote.Yaw=0
+}
+debug= var.YawInput

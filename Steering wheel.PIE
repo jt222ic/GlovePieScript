@@ -1,0 +1,31 @@
+﻿
+ debug=Wiimote1.SteeringAngle
+
+ var.steeringAngle = Wiimote1.SteeringAngle // Assuming Wii.SteeringAngle is the variable holding the steering angle data
+
+// Adjust sensitivity and scaling as needed
+var.steeringInput = MapRange(var.steeringAngle, -180, 180, -1, 1) // Another word of normalize unit to 1 Map the steering angle range to -1 to 1
+debug=var.steeringInput
+// Map the steering input to arrow keys (or joystick axis if preferred)
+if (var.steeringInput < -0.1) { // Adjust threshold as needed
+    Key.A = 1
+}elseif (var.steeringInput > 0.1) {
+    Key.D = 1
+else {
+    Key.A = 0
+    Key.D = 0
+}
+
+Key.W=Wiimote1.One
+Key.S=Wiimote1.Two
+Key.LeftShift=Wiimote1.B
+
+Key.Up=Wiimote1.Right
+
+Key.Down=Wiimote1.Left
+
+Key.Left=Wiimote1.Up
+
+Key.Right=Wiimote1.Down
+
+Key.Space=Wiimote1.A

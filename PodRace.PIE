@@ -1,0 +1,57 @@
+﻿//Joystick erected upward.
+//smooth
+var.smoothFactor=0.5
+var.steeringAngle = Wiimote1.SteeringAngle
+var.steeringAngle2 = Wiimote2.SteeringAngle
+
+var.startingposition =0.2
+var.startingposition2 =0.2
+
+var.steeringInput = MapRange(var.steeringAngle, -180, 180, -1, 1)
+var.steeringInput2 = MapRange(var.steeringAngle2, -180, 180, -1, 1)
+
+var.smoothedSteeringInput = var.smoothFactor * var.steeringInput + (1 - var.smoothFactor) * var.smoothedSteeringInput
+var.smoothedSteeringInput2 = var.smoothFactor * var.steeringInput2 + (1 - var.smoothFactor) * var.smoothedSteeringInput2
+
+
+//debug=var.smoothedSteeringInput
+
+
+var.TurnOm= Wiimote1.One||Wiimote2.One
+var.TurnOff= Wiimote1.Two||Wiimote2.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff=true){
+if(Wiimote1.B&&Wiimote2.B){
+
+ Keyboard.W=1
+}else{
+Keyboard.W=0
+}
+ if (var.smoothedSteeringInput < 0.3 && var.smoothedSteeringInput2 > 0.3) {
+
+    Key.A=1
+} else if (var.smoothedSteeringInput > 0.3 && var.smoothedSteeringInput2 < 0.3) {
+
+    Key.D=1
+} else {
+
+    Key.A =0
+    Key.D=0
+}
+}
+Key.Left = Wiimote1.Left||Wiimote2.Left
+Key.Right= Wiimote1.Right||Wiimote2.Right
+Key.Up =Wiimote1.Up||Wiimote2.Up
+Key.Down =Wiimote1.Down||Wiimote2.Down
+Key.LeftShift=Wiimote1.A
+Key.Space=Wiimote2.A
+Key.Enter=Wiimote.Plus
+Key.Escape=Wiimote.Minus

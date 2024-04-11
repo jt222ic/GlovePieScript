@@ -1,0 +1,34 @@
+﻿// Joynunchuk works
+
+key.W = Wiimote.Nunchuk.JoyY < -0.4
+key.S = Wiimote.Nunchuk.JoyY > 0.4
+key.A = Wiimote.Nunchuk.JoyX < -0.4
+key.D = Wiimote.Nunchuk.JoyX > 0.4
+key.Space = wiimote.Nunchuk.Z
+key.LeftControl = wiimote.Nunchuk.C
+key.Tab = wiimote.Down
+key.1 = wiimote.Left
+key.2 = wiimote.Right
+key.LeftShift = wiimote.Two
+key.Escape = wiimote.Home
+
+
+// wuunite button works
+mouse.LeftButton = Wiimote.A and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.RightButton = Wiimote.B and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.MiddleButton = Wiimote.One and KeepDown(Wiimote.PointerVisible,0.5s)
+
+
+
+
+
+//Mouse cursor for windows and hdmi 1920x1080
+//*
+var.screenWidth = 1920
+var.screenHeight = 1080
+
+mouse.CursorPosX = smooth(1920-round((Wiimote.Dot1X / 1024) * var.screenWidth), 3)
+mouse.CursorPosY = smooth(round((Wiimote.Dot1Y / 768) * var.screenHeight), 3)
+
+
+

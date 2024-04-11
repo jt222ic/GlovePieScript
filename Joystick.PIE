@@ -1,0 +1,43 @@
+﻿var.scaleX = 1; // Adjust scale factors as needed
+var.scaleY = 1;
+var.sensitivity = 1.5;
+
+// Define Xbox controller axes
+var leftStickX = 0; // Initialize analog stick values
+var leftStickY = 0;
+
+// Define Wii Remote buttons for turning on/off
+var.turnOn = Wiimote1.One;
+var.turnOff = Wiimote1.Two;
+
+// Initialize On/Off state
+var.onOff = false;
+
+// Toggle On/Off state based on Wii Remote buttons
+if (var.turnOn) {
+    var.onOff = true;
+}
+
+if (var.turnOff) {
+    var.onOff = false;
+}
+
+// Map Wii Remote movement to Xbox controller analog stick
+if (var.onOff) {
+    // Scale Wii Remote motion sensor data and apply sensitivity
+    var.leftStickX = -Wiimote1.AccelX * scaleX * sensitivity; // Invert X-axis motion
+    var.leftStickY = Wiimote1.AccelY * scaleY * sensitivity;
+
+    // Apply dead zone to prevent small motions from affecting the analog stick
+    if (abs(var.leftStickX) < 10) {
+        var.leftStickX = 0;
+    }
+
+    if (abs(var.leftStickY) < 10) {
+        var.leftStickY = 0;
+    }
+}
+
+// Send Xbox controller analog stick values
+Joystick1.LeftStickX = var.leftStickX;
+Joystick1.LeftStickY = var.leftStickY;

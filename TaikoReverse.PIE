@@ -1,0 +1,41 @@
+﻿
+if((Wiimote1.DrumBeat)&&(Wiimote1.A||Wiimote1.B)=false){
+Keyboard.J = true
+else
+Keyboard.J= false
+
+
+}
+if((Wiimote2.DrumBeat)&&(Wiimote2.A||Wiimote2.B)=false){
+Keyboard.F = true
+else
+Keyboard.F= false
+}
+      // BLUE DON
+if((Wiimote1.DrumBeat)&&(Wiimote1.A||Wiimote1.B)=true){
+Keyboard.K = true
+else
+Keyboard.K= false
+
+
+}
+if((Wiimote2.DrumBeat)&&(Wiimote2.A||Wiimote2.B)=true){
+Keyboard.D = true
+else
+Keyboard.D= false
+}
+
+
+Keyboard.Shift=Wiimote.Minus
+Keyboard.Escape=Wiimote.Plus
+Keyboard.Left =Wiimote.Left
+Keyboard.Up= Wiimote.Up
+Keyboard.Right= Wiimote.Right
+Keyboard.Down=Wiimote.Down
+
+}
+
+
+
+
+

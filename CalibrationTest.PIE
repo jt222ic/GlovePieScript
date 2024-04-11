@@ -1,0 +1,20 @@
+﻿// Calibration routine
+debug="Perform the calibration routine..."
+wait(3 second) // Wait for 3 seconds for user to prepare
+
+// Capture initial Wiimote orientation
+var.initialPitch = wiimote.Pitch
+var.initialRoll = wiimote.Roll
+var.initialYaw = wiimote.Yaw
+
+// Provide instructions to the user
+debug="Hold the Wiimote steady in its default position."
+
+// Wait for the user to hold the Wiimote steady
+if (abs(wiimote.Pitch - var.initialPitch) > 5) || abs(wiimote.Roll - var.initialRoll) > 5 || abs(wiimote.Yaw - var.initialYaw) > 5
+debug="DONE"
+wait(100)
+
+
+// Calibration complete
+debug="Calibration complete. Wiimote is now calibrated."

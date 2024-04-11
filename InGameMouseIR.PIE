@@ -1,0 +1,16 @@
+﻿var.screenWidth = 1920
+var.screenHeight = 1080
+
+// Scale Wiimote's IR sensor data to screen resolution
+var.scaledX = round((Wiimote.Dot1X / 1023) * var.screenWidth)
+var.scaledY = round((Wiimote.Dot1Y / 767) * var.screenHeight)
+
+// Apply smoothing to cursor movement
+var.smoothedX = smooth(var.scaledX, 3)
+var.smoothedY = smooth(var.scaledY, 3)
+
+// Set mouse cursor position
+Mouse.DirectInputX = var.smoothedX
+Mouse.DirectInputY = var.smoothedY
+
+

@@ -1,0 +1,17 @@
+﻿// Define smoothing parameters
+ // Adjust as needed (0.1 to 1)
+var.smoothingIterations = 5; // Number of iterations for smoothing
+
+// Smooth out the mouse movement along the X-axis
+var.smoothedDeltaX = 0;
+for (var.i = 0; var.i < var.smoothingIterations; var.i++) {
+  var.smoothedDeltaX += Smooth(-Delta(Wiimote.Dot1X * var.scaleX) * var.sense, 3)
+}
+Mouse.DirectInputX += var.smoothedDeltaX / var.smoothingIterations;
+
+// Smooth out the mouse movement along the Y-axis
+var.smoothedDeltaY = 0;
+for (var.j = 0; var.j < var.smoothingIterations; var.j++) {
+    var.smoothedDeltaY += Smooth(Delta(Wiimote.Dot1Y * var.scaleY) * var.sense, 3)
+}
+Mouse.DirectInputY += var.smoothedDeltaY / var.smoothingIterations;

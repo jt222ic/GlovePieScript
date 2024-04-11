@@ -1,0 +1,25 @@
+﻿
+var.scaleX = 1920 / 1024
+var.scaleY=1080/768
+var.sense = 25
+
+
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+
+
+mouse.LeftButton = Wiimote.B
+mouse.RightButton = Wiimote.A
+
+key.1 = Wiimote.Left
+key.5 = Wiimote.Right
+
+WASD = Nunchuk1.Joy // Move
+LShift = nunchuk1.C // Ability 1
+mouse.button2 = nunchuk1.Z
+
+
+
+
+

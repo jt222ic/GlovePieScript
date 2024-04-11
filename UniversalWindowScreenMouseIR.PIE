@@ -1,0 +1,11 @@
+﻿var.screenWidth = 1920
+var.screenHeight = 1080
+
+mouse.CursorPosX = smooth(1920-round((Wiimote.Dot1X / 1024) * var.screenWidth), 3)
+mouse.CursorPosY = smooth(round((Wiimote.Dot1Y / 768) * var.screenHeight), 3)
+mouse.LeftButton = Wiimote.B and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.RightButton = Wiimote.A and KeepDown(Wiimote.PointerVisible,0.5s)
+mouse.MiddleButton = Wiimote.Home and KeepDown(Wiimote.PointerVisible,0.5s)
+Key.Five = Wiimote.Plus
+Key.One = Wiimote.Minus
+mouse.RightButton + mouse.LeftButton = Wiimote.One

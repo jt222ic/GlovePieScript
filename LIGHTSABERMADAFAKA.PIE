@@ -1,0 +1,72 @@
+﻿
+  //Force push
+Keyboard.F = Pressed(Nunchuk1.Shakiness > 8 cm)
+// movement
+WASD=Nunchuck.Joy
+//Jump
+Keyboard.Space=Nunchuck.Z
+//Alternate to gun mode
+Mouse.LeftButton=Wiimote.B
+
+//Weapon swap
+Keyboard.Two= Wiimote.Down
+Keyboard.Three=Wiimote.Left
+Keyboard.Four= wiimote.Right
+
+// Turn on THE SABER
+debug=""
+if (abs(Wiimote.Pitch - 90) < 50) && Wiimote1.Minus = true {
+Keyboard.One = true
+debug="SABER"
+} else
+Keyboard.One= false
+debug="NoSABER"
+endif
+
+if(Wiimote.A=true&&Wiimote.SwingVertical){
+mouse.LeftButton = true
+
+debug="swinging"
+else
+mouse.LeftButton = false
+debug="done with swinging"
+}
+
+if(Wiimote.A=true&&Wiimote.SwingHorizontal){
+debug="swingingHorizontal"
+Keyboard.RightAlt=true
+else
+Keyboard.RightAlt=false
+}
+endif
+
+if(Wiimote.SwingHorizontal){
+debug="swingingHorizontal"
+Mouse.RightButton=true
+else
+Mouse.RightButton=false
+}
+endif
+
+var.scaleX = 800 / 1024
+var.scaleY=600/768
+var.sense = 17
+
+var.TurnOm= Nunchuck.C
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff = true){
+if Wiimote.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+}
+}

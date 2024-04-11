@@ -1,0 +1,38 @@
+﻿
+var.HitGesture=false
+var.HitTreshold= 0.8
+
+var.accZ=Wiimote.RelAccZ
+
+// Check for hit gesture
+    if  var.isHitGesture=false && var.accZ > var.hitThreshold{
+        var.isHitGesture = true
+    }
+    // Reset gesture flag if needed
+    if var.isHitGesture && var.accZ < var.hitThreshold {
+        var.isHitGesture = false
+    }
+
+    debug= var.isHitGesture
+
+if(Wiimote1.DrumBeat&&Wiimote.dot2vis=true){
+Keyboard.J = true
+
+else
+Keyboard.J= false
+
+}
+      // BLUE DON
+if(Wiimote1.DrumBeat&&Wiimote.dot2vis=false){
+Keyboard.K = true
+else
+Keyboard.K= false
+
+}
+}
+
+
+// debug=var.currentDot1Vis
+        //debug=Wiimote1.TimeStamp
+        debug=var.dot1VisDuration
+

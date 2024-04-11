@@ -1,0 +1,42 @@
+﻿//LightGun game only
+
+
+
+var.scaleX = 1920 / 1024
+var.scaleY= 1080/ 768
+var.sensitivity = 1.8
+
+var.TurnOm= Wiimote1.One
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff=true){
+if Wiimote1.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote1.Dot1X*var.scaleX)*var.sensitivity, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote1.Dot1Y*var.scaleY)*var.sensitivity, 3)
+}
+}
+
+
+
+// Mouse
+mouse.button1 = Wiimote1.B // Primary Fire
+mouse.button2 = Wiimote1.A
+mouse.MiddleButton = Wiimote.Plus
+
+
+// Lightgun
+
+Key.Enter= Wiimote.Minus
+
+
+
+

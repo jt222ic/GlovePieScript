@@ -1,0 +1,55 @@
+﻿/// IR Lightsource onto screen, recommend to have high sensitivity so you
+//move less with the wii mote for full 360 angle
+// GLOVE PIE version 0.43 + original wii + extention motionplus
+
+
+
+
+var.scaleX = 1920 / 1024
+var.scaleY=1080/768
+var.sense = 17
+
+var.TurnOm= Wiimote1.One
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+
+if(var.OnOff = true){
+if Wiimote.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+}
+}
+
+key.W = Wiimote.Nunchuk.JoyY < -0.4
+key.S = Wiimote.Nunchuk.JoyY > 0.4
+key.A = Wiimote.Nunchuk.JoyX < -0.4
+key.D = Wiimote.Nunchuk.JoyX > 0.4
+
+
+Space = Wiimote1.A // Jump
+mouse.button1 = Wiimote1.B // Primary Fire
+mouse.button2 = Nunchuk1.Z  // Secondary Fire Off Hand duel Wield
+Keyboard.LeftShift = Nunchuck1.C   // Sprint
+
+
+Keyboard.One= Wiimote1.Down
+Keyboard.Q= Wiimote1.Left
+Keyboard.E= Wiimote1.Up
+Keyboard.F= Wiimote1.Right
+keyboard.LeftAlt =Wiimote1.Minus
+
+  // doesnt work for wii plus for somereason
+//Keyboard.LeftAlt=Pressed(Wiimote1.Shakiness > 10 cm)   // Combat roll
+Space = Pressed(Nunchuk1.Shakiness > 10 cm)    //Keyboard.Q = Nunchuk1.SwingHorizontal // Melee
+
+
+
+

@@ -1,0 +1,61 @@
+﻿// Smoothing and calibration
+var.N = 10;
+var.yawSum = 0;
+var.sampleCount = 0;
+var.referenceYaw = 0; // Choose a reference yaw value
+var.resetInterval = 2000; // Reset yaw value every 2 seconds (adjust as needed)
+var.lastResetTime = Wiimote.TimeStamp; // Initialize last reset time
+
+// Main loop
+
+    // Smoothing algorithm
+    var.yaw = Wiimote1.Yaw;
+
+      debug = Wiimote1.Yaw;
+    var.yawSum = var.yawSum + var.yaw;
+    var.sampleCount = var.sampleCount + 1;
+
+    if (var.sampleCount >= var.N) {
+        var.avgYaw = var.yawSum / var.N;
+        // Reset sample count and yaw sum
+        var.yawSum = 0;
+        var.sampleCount = 0;
+        
+        // Update reference yaw value
+        var.referenceYaw = var.avgYaw;
+    }
+    
+    // Check if it's time to reset yaw
+    if (Wiimote.TimeStamp - var.lastResetTime >= var.resetInterval) {
+        // Reset yaw value to reference point
+        Wiimote1.Yaw = var.referenceYaw;
+        
+        // Update last reset time
+        var.lastResetTime = Wiimote.TimeStamp;
+
+
+    // Drum hit detection logic
+    if (Wiimote1.Yaw >= 49) {
+        if (Wiimote1.DrumBeat) {
+            Key.F = 1;
+        } else {
+            Key.F = 0;
+        }
+    } else {
+        if (Wiimote1.DrumBeat) {
+           Key.D = 1;
+        } else {
+           Key.D = 0;
+        }
+    }
+
+    // Check for DrumBeat motion for Wiimote2
+    if (Wiimote2.DrumBeat) {
+        Key.J = 1;
+    } else {
+        Key.J = 0;
+    }
+
+    // Debugging statement
+
+}

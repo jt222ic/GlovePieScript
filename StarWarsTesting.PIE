@@ -1,0 +1,29 @@
+﻿/// IR Lightsource onto screen, recommend to have high sensitivity so you
+//move less with the wii mote for full 360 angle
+var.scaleX = 1920 / 1024
+var.scaleY=1080/768
+var.sense = 25
+
+if Wiimote.Dot1Size > 0{
+Mouse.DirectInputX += Smooth(-Delta(Wiimote.Dot1X*var.scaleX)*var.sense, 3)
+
+Mouse.DirectInputY += Smooth(Delta(Wiimote.Dot1Y*var.scaleY)*var.sense, 3)
+}
+
+
+Space = Wiimote1.A // Jump
+mouse.button1 = Wiimote1.B // Primary Fire
+Keyboard.Q = Nunchuk.SwingDown  // Melee
+Keyboard.F = Nunchuk.C
+Keyboard.Shift = Nunchuk.Z
+
+Keyboard.One = Wiimote1.Plus // Quick Melee
+Keyboard.Two = Wiimote1.Minus // Ablity 2
+
+
+
+
+
+
+
+

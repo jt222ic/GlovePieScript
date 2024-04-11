@@ -1,0 +1,35 @@
+﻿
+PPJoy1.Digital0=Wiimote1.A||Nunchuck.Z
+PPJoy1.Digital1=Wiimote1.B
+PPJoy1.Digital2=Wiimote1.Plus
+PPJoy1.Digital3=Wiimote1.Minus
+
+// pre-mapping
+PPJoy1.Analog0 = Wiimote.Nunchuk.JoyY
+PPJoy1.Analog1 = Wiimote.Nunchuk.JoyX
+
+
+
+var.scaleX = 1920 / 1024
+var.scaleY= 1080/ 768
+var.sensitivity = 0.2
+
+var.TurnOm= Wiimote1.One
+var.TurnOff= Wiimote1.Two
+
+if(var.TurnOm = true)
+var.OnOff= true
+endif
+
+if(var.TurnOff = true)
+var.OnOff= false
+endif
+*/
+var.sensitivity=0.2
+if(var.OnOff=true){
+if Wiimote1.Dot1Size > 0{
+PPJoy1.Analog0 += Smooth(-Delta(Wiimote1.Dot1X)*var.sensitivity, 100)
+
+PPJoy1.Analog1 += Smooth(Delta(Wiimote1.Dot1Y)*var.sensitivity, 100)
+}
+}
